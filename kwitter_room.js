@@ -12,7 +12,14 @@ var firebaseConfig = {
     firebase.initializeApp(firebaseConfig);
     username=localStorage.getItem("username_key");
     document.getElementById("user_name").innerHTML=" Welcome "+ username +"!";
-function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
+
+   function addroom() {
+    roomname=document.getElementById("room_name").value;
+    localStorage.setItem("roomname_key",roomname)
+    firebase.database().ref("/").child(roomname).update({purpose:"roomname"});
+    window.location="kwitter_page.html"
+   }
+   function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
        Room_names = childKey;
       //Start code
 
